@@ -1,0 +1,35 @@
+{% extends "predict/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="content-section">
+  <form method="post">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Enter parametrs</legend>
+      {{form|crispy}}
+    </fieldset>
+    <div class="form-group">
+      <button class="btn btn-outline-info" type="submit">Predict price</button>
+    </div>
+  </form>
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      Beta-test
+    </small>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block predict %}
+  {% if predict == '' %}
+    <h3>Make your prediction!</h3>
+  {% else %}
+    <h3>Your prediction</h3>
+    {% for key, value in predict %}
+      <p>{{key}}: </p>
+      <p>{{value}}</p>
+    {% endfor %}
+  {% endif %}
+{% endblock predict %}
